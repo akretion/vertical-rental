@@ -1,0 +1,66 @@
+<!-- Copyright (C) 2023 Akretion (<http://www.akretion.com>).
+ @author Kévin Roche <kevin.roche@akretion.com>  -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale_rental.view_order_form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_rental.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/list" position="attributes">
+                <attribute name="editable">bottom</attribute>
+            </xpath>
+
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='start_date']"
+                position="attributes"
+            >
+                <attribute name="invisible">not must_have_dates</attribute>
+                <attribute name="readonly">1</attribute>
+                <attribute name="required">must_have_dates and not is_rental</attribute>
+            </xpath>
+
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='end_date']"
+                position="attributes"
+            >
+                <attribute name="invisible">not must_have_dates</attribute>
+                <attribute name="readonly">1</attribute>
+                <attribute name="required">must_have_dates and not is_rental</attribute>
+            </xpath>
+
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='number_of_days']"
+                position="attributes"
+            >
+                <attribute name="invisible">not must_have_dates</attribute>
+                <attribute name="readonly">1</attribute>
+                <attribute name="required">must_have_dates and not is_rental</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='start_date']"
+                position="before"
+            >
+                <field name="is_rental" column_invisible="1" />
+                <button
+                    string="Rental Config."
+                    name="open_rental_line_wizard"
+                    type="object"
+                    invisible="not is_rental or parent.state != 'draft'"
+                    class="btn btn-info"
+                />
+                <field
+                    name="rental_id"
+                    invisible="not rental_id"
+                    column_invisible="not parent.is_rental"
+                />
+            </xpath>
+
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='product_uom_qty']"
+                position="attributes"
+            >
+                <attribute name="readonly">is_rental</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
