@@ -15,7 +15,7 @@
                 <group
                     name="rental-service"
                     string="Related Rented Services"
-                    attrs="{'invisible': [('type', '!=', 'service')]}"
+                    invisible="type != 'service'"
                     col="1"
                 >
                     <field name="rented_product_ids" nolabel="1" />
@@ -23,7 +23,7 @@
                 <group
                     name="rental-product"
                     string="Rental"
-                    attrs="{'invisible': ['|', ('type', '!=', 'service'), ('product_variant_count', '>', 1)]}"
+                    invisible="type != 'service' or product_variant_count > 1"
                 >
                     <field name="rental_service_ids" nolabel="1" />
                 </group>
@@ -31,7 +31,7 @@
                     type="action"
                     name="%(sale_rental.create_rental_product_action)d"
                     string="Create Rental Service"
-                    attrs="{'invisible': [('type', '=', 'service')]}"
+                    invisible="type == 'service'"
                 />
             </group>
         </field>
@@ -45,28 +45,28 @@
                 <label
                     for="rented_product_tmpl_ids"
                     string="Rental"
-                    attrs="{'invisible': ['|', ('type', '!=', 'service'), ('product_variant_count', '>', 1)]}"
+                    invisible="type != 'service' or product_variant_count > 1"
                 />
                 <field
                     name="rented_product_tmpl_ids"
                     nolabel="1"
-                    attrs="{'invisible': ['|', ('type', '!=', 'service'), ('product_variant_count', '>', 1)]}"
+                    invisible="type != 'service' or product_variant_count > 1"
                 />
                 <label
                     for="rental_service_tmpl_ids"
                     string="Rental Services"
-                    attrs="{'invisible': ['|', ('type', '=', 'service'), ('product_variant_count', '>', 1)]}"
+                    invisible="type == 'service' or product_variant_count > 1"
                 />
                 <field
                     name="rental_service_tmpl_ids"
                     nolabel="1"
-                    attrs="{'invisible': ['|', ('type', '=', 'service'), ('product_variant_count', '>', 1)]}"
+                    invisible="type == 'service' or product_variant_count > 1"
                 />
                 <button
                     type="action"
                     name="%(sale_rental.create_rental_product_action)d"
                     string="Create Rental Service"
-                    attrs="{'invisible': ['|', ('type', '=', 'service'), ('product_variant_count', '>', 1)]}"
+                    invisible="type == 'service' or product_variant_count > 1"
                 />
             </group>
         </field>
