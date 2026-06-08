@@ -36,6 +36,7 @@ class TestSaleRental(TransactionCase):
             "rental_qty": 1,
             "rental": True,
             "rental_type": "new_rental",
+            "rented_product_id": self.test_rental_prod.rented_product_ids[0].id,
             "product_uom_qty": 10,
             "number_of_days": 10,
         }
@@ -63,12 +64,12 @@ class TestSaleRental(TransactionCase):
         so_form = Form(self.env["sale.order"])
         so_form.partner_id = self.test_partner
         with so_form.order_line.new() as line:
-            line.product_id = self.test_rental_prod.rented_product_id
+            line.product_id = self.test_rental_prod.rented_product_ids[0]
             line.product_uom_qty = 1
             line.sell_rental_id = rental
         so2 = so_form.save()
         line_vals = {
-            "product_id": self.test_rental_prod.rented_product_id.id,
+            "product_id": self.test_rental_prod.rented_product_ids[0].id,
             "name": "Test",
             "display_type": False,
             "product_uom_qty": 1,
@@ -106,6 +107,7 @@ class TestSaleRental(TransactionCase):
                 "rental_qty": 1,
                 "rental": True,
                 "rental_type": "new_rental",
+                "rented_product_id": self.test_rental_prod.rented_product_ids[0].id,
                 "product_uom_qty": reminder_days,
                 "number_of_days": reminder_days,
             }

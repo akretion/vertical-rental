@@ -119,7 +119,7 @@ class SaleRental(models.Model):
     )
     rented_product_id = fields.Many2one(
         "product.product",
-        related="start_order_line_id.product_id.rented_product_id",
+        related="start_order_line_id.rented_product_id",
         string="Rented Product",
         readonly=True,
         store=True,
@@ -268,7 +268,8 @@ class SaleRental(models.Model):
         )
         if not template:
             logger.warning(
-                "Email template your_module.mail_template_rental_return_reminder not found."
+                "Email template sale_rental.mail_template_rental_return_reminder "
+                "not found."
             )
             return
 
