@@ -65,7 +65,7 @@
                     nolabel="1"
                     attrs="{'invisible': [('rental_service_tmpl_ids', '=', [])]}"
                 />
-                 <button
+                <button
                     type="action"
                     name="%(sale_rental.create_rental_product_action)d"
                     string="Create Rental Service"
