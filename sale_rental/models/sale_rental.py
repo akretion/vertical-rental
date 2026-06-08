@@ -22,19 +22,18 @@ class SaleRental(models.Model):
         "extension_order_line_ids.end_date",
         "extension_order_line_ids.state",
         "start_order_line_id.end_date",
+        "partner_id",
+        "rented_product_id",
+        "start_date",
+        "end_date",
+        "state",
     )
-    def name_get(self):
-        res = []
+    def _compute_display_name(self):
         for rental in self:
-            name = "[{}] {} - {} > {} ({})".format(
-                rental.partner_id.display_name,
-                rental.rented_product_id.display_name,
-                rental.start_date,
-                rental.end_date,
-                rental._fields["state"].convert_to_export(rental.state, rental),
-            )
-            res.append((rental.id, name))
-        return res
+            state_label = dict(
+                rental._fields["state"]._description_selection(rental.env)
+            ).get(rental.state, "")
+            rental.display_name = f"[{rental.partner_id.display_name}] {rental.rented_product_id.display_name} - {rental.start_date} > {rental.end_date} ({state_label})"  # noqa: E501
 
     @api.depends(
         "sell_order_line_ids.move_ids.state",
