@@ -83,7 +83,7 @@ class CreateRentalProduct(models.TransientModel):
             "name": pp_obj._description,
             "type": "ir.actions.act_window",
             "res_model": pp_obj._name,
-            "view_mode": "form,tree,kanban",
+            "view_mode": "form,list,kanban",
             "nodestroy": False,  # Close the wizard pop-up
             "target": "current",
             "res_id": product.id,
