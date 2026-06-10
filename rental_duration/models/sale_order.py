@@ -46,7 +46,7 @@ class SaleOrderLine(models.Model):
                 and rec.start_date
             ):
                 rec.end_date = rec.start_date + relativedelta(
-                    months=rec.product_uom_qty * rec.product_uom.factor
+                    days=round(rec.product_uom_qty * rec.product_uom.factor_inv)
                 )
 
     def _compute_number_of_days(self):

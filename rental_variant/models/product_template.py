@@ -31,15 +31,6 @@ class ProductTemplate(models.Model):
             ProductTemplate, self - with_variants
         )._compute_rented_product_tmpl_id()
 
-    def copy_for_rental(self):
-        self.ensure_one()
-        rental_template = self.with_context(copy_for_rental=True).copy()
-        active_langs = self.env["res.lang"].get_installed()
-        for lang_code, _lang_name in active_langs:
-            new_name = "[RENT] %s" % self.with_context(lang=lang_code).name
-            rental_template.with_context(lang=lang_code).name = new_name
-        self.rental_product_tmpl_id = rental_template.id
-
     def write(self, vals):
         for rec in self:
             if "attribute_line_ids" in vals and rec.rented_product_tmpl_id:
@@ -51,16 +42,6 @@ class ProductTemplate(models.Model):
                 )
         return super().write(vals)
 
-    @api.model_create_multi
-    def create(self, values):
-        templates = super().create(values)
-        if self.env.context.get("copy_for_rental"):
-            for template in templates:
-                template.must_have_dates = True
-                template.type = "service"
-                template.tracking = "none"
-                template.uom_id = self.env.ref("uom.product_uom_day").id
-        return templates
 
     @api.depends(
         "rented_product_tmpl_id.attribute_line_ids",

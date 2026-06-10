@@ -15,7 +15,7 @@
     <record id="product_uom_week" model="uom.uom">
         <field name="name">Weeks</field>
         <field name="category_id" ref="uom_categ_time" />
-        <field name="factor" eval="7.0" />
+        <field name="factor_inv" eval="7.0" />
         <field name="uom_type">bigger</field>
     </record>
     <record id="product_uom_month" model="uom.uom">

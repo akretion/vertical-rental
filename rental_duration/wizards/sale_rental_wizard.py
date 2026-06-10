@@ -22,9 +22,8 @@ class SaleRentalLineWizard(models.TransientModel):
     def confirm_rental_config(self):
         res = super().confirm_rental_config()
         line = self.rental_line_id
-        end = self.start_date + relativedelta(
-            months=self.rental_duration * self.rental_uom_id.factor
-        )
+        ref_days = self.rental_duration * self.rental_uom_id.factor_inv
+        end = self.start_date + relativedelta(days=ref_days)
         line.write(
             {
                 "product_uom_qty": self.rental_duration,

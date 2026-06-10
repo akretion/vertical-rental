@@ -20,13 +20,6 @@
                         invisible="1"
                     />
                     <button
-                        name="copy_for_rental"
-                        string="Copy For Rental"
-                        type="object"
-                        class="btn-primary"
-                        invisible="type == 'service' or product_variant_count == 1 or rental_product_tmpl_id != False"
-                    />
-                    <button
                         name="update_rental_attributes_values"
                         string="Update Attributes values"
                         type="object"

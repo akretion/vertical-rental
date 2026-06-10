@@ -136,3 +136,8 @@ msgstr "Temps"
 #: model:uom.uom,name:rental_duration.product_uom_year
 msgid "Years"
 msgstr "Années"
+
+#. module: rental_duration
+#: model:uom.uom,name:rental_duration.product_uom_week
+msgid "Weeks"
+msgstr "Semaines"

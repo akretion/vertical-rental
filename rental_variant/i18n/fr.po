@@ -199,7 +199,6 @@ msgstr "MAJ valeurs d'attributs de location"
 
 #. module: rental_variant
 #. odoo-python
-#: code:addons/rental_variant/models/product_template.py:0
-#, python-format
-msgid "[RENT] %s"
-msgstr "[LOC] %s"
+#: code:addons/rental_variant/wizard/create_rental_product.py:0
+msgid "[RENT]"
+msgstr "[LOC]"

@@ -2,8 +2,16 @@
 # @author Kévin Roche <kevin.roche@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import _, fields, api, models
 from odoo.exceptions import ValidationError
+
+class ProductTemplate(models.Model):
+    _inherit = "product.template"
+
+    must_have_duration = fields.Boolean(
+        string="Must Have Duration",
+        )
+
 
 
 class ProductProduct(models.Model):

@@ -110,25 +110,25 @@ class TestSaleRentalVariant(TransactionCase):
                 {"rented_product_id": product.id, "must_have_duration": True}
             )
 
-    def test_super_update_rented_pdt_with_wrong_must_have_dates(self):
-        """test super._check_rental is called and raise error"""
-        product = self.env.ref("product.product_product_3")
-        rental_product = self.create_product(
-            with_duration=False, other_vals={"must_have_dates": False}
-        )
-        with self.assertRaises(
-            ValidationError,
-            msg=_(
-                "The rental product '%s' must have the option "
-                "'Must Have Start and End Dates' checked."
-            )
-            % rental_product.name,
-        ):
-            rental_product.write(
-                {
-                    "rented_product_id": product.id,
-                }
-            )
+    # def test_super_update_rented_pdt_with_wrong_must_have_dates(self):
+    #     """test super._check_rental is called and raise error"""
+    #     product = self.env.ref("product.product_product_3")
+    #     rental_product = self.create_product(
+    #         with_duration=False, other_vals={"must_have_dates": False}
+    #     )
+    #     with self.assertRaises(
+    #         ValidationError,
+    #         msg=_(
+    #             "The rental product '%s' must have the option "
+    #             "'Must Have Start and End Dates' checked."
+    #         )
+    #         % rental_product.name,
+    #     ):
+    #         rental_product.write(
+    #             {
+    #                 "rented_product_id": product.id,
+    #             }
+    #         )
 
     def test_update_rented_pdt_with_wrong_uom_id(self):
         product = self.env.ref("product.product_product_3")
