@@ -216,6 +216,6 @@
         id="sale_rental_menu"
         parent="sale.sale_order_menu"
         action="sale_rental_action"
-        sequence="2"
+        sequence="25"
     />
 </odoo>

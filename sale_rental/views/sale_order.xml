@@ -15,10 +15,16 @@
                 expr="//field[@name='order_line']/form//field[@name='start_date']"
                 position="before"
             >
-                <field name="rental_type" invisible="not rental" required="rental" />
+                <field
+                    name="rental_type"
+                    readonly="state != 'draft'"
+                    invisible="not rental"
+                    required="rental"
+                />
                 <field
                     name="extension_rental_id"
                     options="{'no_quick_create': True, 'no_create_edit': True}"
+                    readonly="state != 'draft'"
                     invisible="rental_type != 'rental_extension'"
                     required="rental_type == 'rental_extension'"
                     domain="[('rental_product_id', '=', product_id), ('state', 'in', ('ordered', 'out')), ('company_id', '=', company_id)]"
@@ -27,6 +33,7 @@
                     name="sell_rental_id"
                     options="{'no_quick_create': True, 'no_create_edit': True}"
                     invisible="not can_sell_rental"
+                    readonly="state != 'draft'"
                     domain="[('rented_product_id', '=', product_id), ('state', '=', 'out'), ('company_id', '=', company_id)]"
                 />
                 <field
