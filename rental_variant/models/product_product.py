@@ -12,8 +12,9 @@ class ProductProduct(models.Model):
     )
 
     def get_rented_product_id(self):
-        if len(self.rented_product_tmpl_id.product_variant_ids) == 1:
-            return self.rented_product_tmpl_id.product_variant_ids
+        physical = self.rented_product_tmpl_id.product_variant_ids
+        if not physical.product_template_attribute_value_ids:
+            return physical[:1]
         product = self.rented_product_tmpl_id.product_variant_ids.filtered_domain(
             [
                 (

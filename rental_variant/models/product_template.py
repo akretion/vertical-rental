@@ -26,7 +26,9 @@ class ProductTemplate(models.Model):
     def _compute_rented_product_tmpl_id(self):
         with_variants = self.filtered(lambda template: template.attribute_line_ids)
         for template in with_variants:
-            template.rental_product_tmpl_id.rented_product_tmpl_id = template.id
+            rental = template.rental_product_tmpl_id
+            if rental and rental.rented_product_tmpl_id != template:
+                rental.rented_product_tmpl_id = template.id
         return super(
             ProductTemplate, self - with_variants
         )._compute_rented_product_tmpl_id()
